@@ -12,6 +12,8 @@
 		5B6581B91FF40AA200F806A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B6581B71FF40AA200F806A2 /* Main.storyboard */; };
 		5B6581BB1FF40AA200F806A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B6581BA1FF40AA200F806A2 /* Assets.xcassets */; };
 		5B6581BE1FF40AA200F806A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B6581BC1FF40AA200F806A2 /* LaunchScreen.storyboard */; };
+		5B6581C61FF466FB00F806A2 /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6581C51FF466FB00F806A2 /* TextFieldDelegate.swift */; };
+		5B9B5B151FF69D6D009114F5 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9B5B141FF69D6D009114F5 /* ActivityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		5B6581BA1FF40AA200F806A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B6581BD1FF40AA200F806A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B6581BF1FF40AA200F806A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B6581C51FF466FB00F806A2 /* TextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
+		5B9B5B141FF69D6D009114F5 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +60,9 @@
 			children = (
 				5B6581B31FF40AA200F806A2 /* AppDelegate.swift */,
 				5B6581B51FF40AA200F806A2 /* ViewController.swift */,
+				5B9B5B141FF69D6D009114F5 /* ActivityViewController.swift */,
 				5B6581B71FF40AA200F806A2 /* Main.storyboard */,
+				5B6581C51FF466FB00F806A2 /* TextFieldDelegate.swift */,
 				5B6581BA1FF40AA200F806A2 /* Assets.xcassets */,
 				5B6581BC1FF40AA200F806A2 /* LaunchScreen.storyboard */,
 				5B6581BF1FF40AA200F806A2 /* Info.plist */,
@@ -136,8 +142,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B6581C61FF466FB00F806A2 /* TextFieldDelegate.swift in Sources */,
 				5B6581B61FF40AA200F806A2 /* ViewController.swift in Sources */,
 				5B6581B41FF40AA200F806A2 /* AppDelegate.swift in Sources */,
+				5B9B5B151FF69D6D009114F5 /* ActivityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
