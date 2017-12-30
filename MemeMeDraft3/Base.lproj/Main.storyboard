@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,20 +37,23 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4OA-jH-E1A" userLabel="topTextField">
-                                <rect key="frame" x="5" y="172" width="375" height="30"/>
-                                <nil key="textColor"/>
+                            <textField opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4OA-jH-E1A" userLabel="topTextField">
+                                <rect key="frame" x="5" y="173" width="375" height="30"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g7H-Jw-jQ7" userLabel="bottomTextField">
+                            <textField opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g7H-Jw-jQ7" userLabel="bottomTextField">
                                 <rect key="frame" x="5" y="413" width="375" height="30"/>
-                                <nil key="textColor"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t9C-46-m58" userLabel="topToolbar">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9C-46-m58" userLabel="topToolbar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem systemItem="action" id="gH6-Ec-h2W" userLabel="Share">
                                         <connections>
@@ -63,37 +65,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="g7H-Jw-jQ7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="413" id="4k9-Js-tG8"/>
                             <constraint firstItem="A9g-e6-eAr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="7ab-Wb-WTm"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7hb-Pl-mTa"/>
-                            <constraint firstItem="4OA-jH-E1A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="8Vf-Ol-Irp"/>
-                            <constraint firstItem="A9g-e6-eAr" firstAttribute="top" secondItem="g7H-Jw-jQ7" secondAttribute="bottom" constant="180" id="Bb4-Fj-LuB"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="trailing" secondItem="A9g-e6-eAr" secondAttribute="trailing" id="CDW-J2-z4Y"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EFH-OO-Dt4"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="leading" secondItem="t9C-46-m58" secondAttribute="leading" id="HfP-yt-Df2"/>
-                            <constraint firstItem="4OA-jH-E1A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="Huc-aO-XEe"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="HwF-Kt-dFR"/>
-                            <constraint firstAttribute="trailing" secondItem="g7H-Jw-jQ7" secondAttribute="trailing" constant="-5" id="I88-0k-DG4"/>
-                            <constraint firstItem="g7H-Jw-jQ7" firstAttribute="leading" secondItem="4OA-jH-E1A" secondAttribute="leading" id="NVe-IQ-yAH"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ONl-gs-UhU"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="leading" secondItem="A9g-e6-eAr" secondAttribute="leading" id="QQL-Dg-7zh"/>
-                            <constraint firstItem="A9g-e6-eAr" firstAttribute="top" secondItem="THN-ok-dib" secondAttribute="bottom" constant="1" id="SBS-NU-t7x"/>
-                            <constraint firstItem="g7H-Jw-jQ7" firstAttribute="top" secondItem="4OA-jH-E1A" secondAttribute="bottom" constant="211" id="SUR-b9-xj5"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Xct-9r-CkB"/>
-                            <constraint firstItem="g7H-Jw-jQ7" firstAttribute="trailing" secondItem="4OA-jH-E1A" secondAttribute="trailing" id="bdy-f3-AJ4"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="top" secondItem="t9C-46-m58" secondAttribute="top" id="cbW-R1-TND"/>
-                            <constraint firstItem="4OA-jH-E1A" firstAttribute="top" secondItem="t9C-46-m58" secondAttribute="bottom" constant="128" id="efL-L7-4Xh"/>
-                            <constraint firstItem="4OA-jH-E1A" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="172" id="f2P-2f-4l7"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="trailing" secondItem="t9C-46-m58" secondAttribute="trailing" id="hlv-Tl-ATo"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="4OA-jH-E1A" secondAttribute="trailing" constant="-21" id="hnR-4F-rdX"/>
-                            <constraint firstAttribute="trailing" secondItem="4OA-jH-E1A" secondAttribute="trailing" constant="-5" id="jNc-bf-0K1"/>
-                            <constraint firstItem="A9g-e6-eAr" firstAttribute="top" secondItem="THN-ok-dib" secondAttribute="bottom" constant="1" id="oMs-9f-ued"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sWe-dO-HNV"/>
-                            <constraint firstItem="g7H-Jw-jQ7" firstAttribute="top" secondItem="4OA-jH-E1A" secondAttribute="bottom" constant="211" id="u1N-8B-rGR"/>
-                            <constraint firstAttribute="trailing" secondItem="THN-ok-dib" secondAttribute="trailing" id="uTO-JH-WjE"/>
-                            <constraint firstItem="g7H-Jw-jQ7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="wkJ-M8-ZBd"/>
-                            <constraint firstItem="THN-ok-dib" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="yuq-rd-yeZ"/>
-                            <constraint firstItem="A9g-e6-eAr" firstAttribute="top" secondItem="THN-ok-dib" secondAttribute="bottom" constant="1" id="zkL-CT-Hmm"/>
+                            <constraint firstItem="A9g-e6-eAr" firstAttribute="leading" secondItem="THN-ok-dib" secondAttribute="leading" id="AAK-Qt-hNd"/>
+                            <constraint firstItem="THN-ok-dib" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="MbD-TZ-biM"/>
+                            <constraint firstItem="A9g-e6-eAr" firstAttribute="trailing" secondItem="THN-ok-dib" secondAttribute="trailing" id="eRN-Xc-TaF"/>
+                            <constraint firstAttribute="trailing" secondItem="THN-ok-dib" secondAttribute="trailing" id="f2J-sb-fIG"/>
+                            <constraint firstItem="THN-ok-dib" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="qpR-Sb-juP"/>
+                            <constraint firstItem="A9g-e6-eAr" firstAttribute="top" secondItem="THN-ok-dib" secondAttribute="bottom" constant="1" id="reA-Mv-3nQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -4,14 +4,14 @@
 //
 //  Created by ALCALY LO on 12/27/17.
 //  Copyright © 2017 ALCALY LO. All rights reserved.
-//
+//  Users/alcalylo/Desktop/myApps/MemeMeDraft3/MemeMeDraft3/ViewController.swift
 
 import UIKit
 
 class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-
     
-    // Define prope/Users/alcalylo/Desktop/myApps/MemeMeDraft3/MemeMeDraft3/ViewController.swiftrties
+    
+    // Define properties
     
     @IBOutlet weak var Camera: UIBarButtonItem!
     @IBOutlet weak var Album: UIBarButtonItem!
@@ -21,7 +21,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var Share: UIBarButtonItem!
-
+    
     
     
     struct Meme {
@@ -54,19 +54,19 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         Camera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         subscribeToKeyboardNotifications()
         Share.isEnabled = false
-    
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    // Set TextField Delegate
-    
-    self.topTextField.delegate = textField1
-    self.bottomTextField.delegate = textField2
-    
-    topTextField.text = ""
-    bottomTextField.text = ""
+        // Set TextField Delegate
+        
+        self.topTextField.delegate = textField1
+        self.bottomTextField.delegate = textField2
+        
+        topTextField.text = ""
+        bottomTextField.text = ""
         
         // Set Meme Styles
         
@@ -78,11 +78,9 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         
         topTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.defaultTextAttributes = memeTextAttributes
-        
-        
-    
     }
-
+    
+    
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
@@ -101,6 +99,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         present(imagePicker, animated: true, completion: nil)
         
     }
+    
     
     //Pick An Image From Camera
     
@@ -130,12 +129,14 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
             bottomTextField.text = "BOTTOM"
             topTextField.textAlignment = NSTextAlignment.center
             bottomTextField.textAlignment = NSTextAlignment.center
-           topToolbar.isHidden = false
+            topToolbar.isHidden = false
             Share.isEnabled = true
-        
+            
         }
+    
         dismiss(animated: true, completion: nil)
     }
+    
     
     // Dismiss View
     
@@ -144,6 +145,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     }
     
     
+    // Keyboard Setup And Notifications
     
     @objc func keyboardWillShow(_ notification:Notification) {
         
@@ -157,7 +159,6 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         if bottomTextField.isFirstResponder {
             view.frame.origin.y += getKeyboardHeight(notification)
         }
-        
     }
     
     
@@ -177,12 +178,12 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     }
     
     
-    
     func unsubscribeFromKeyboardNotifications() {
         
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
+    
     
     // Generate a MemedImage
     
@@ -204,11 +205,13 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     
     
     // Save the meme
-
+    
     func save(memedImage: UIImage) {
-                let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, memeOriginal: imageView.image!, memedImage: generateMemedImage())
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, memeOriginal: imageView.image!, memedImage: generateMemedImage())
     }
     
+    
+    // Instantiate Activity View Controller
     
     @IBAction func shareAnImageController (_ sender: Any) {
         
@@ -226,7 +229,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         present(activityController, animated: true, completion: nil)
     }
     
-
-
+    
+    
 }
 
