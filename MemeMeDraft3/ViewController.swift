@@ -21,7 +21,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var Share: UIBarButtonItem!
-    
+    @IBOutlet weak var Cancel: UIBarButtonItem!
     
     
     struct Meme {
@@ -53,7 +53,10 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         imageView.contentMode = .scaleAspectFit
         Camera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         subscribeToKeyboardNotifications()
+        topTextField.isHidden = true
+        bottomTextField.isHidden = true
         Share.isEnabled = false
+        Cancel.isEnabled = false
     }
     
     
@@ -92,7 +95,10 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         
         Share.isEnabled = true
+        Cancel.isEnabled = true
         topToolbar.isHidden = false
+        topTextField.isHidden = false
+        bottomTextField.isHidden = false
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
@@ -110,6 +116,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         imagePicker.sourceType = .camera
         present(imagePicker, animated: true, completion: nil)
         Share.isEnabled = true
+        Cancel.isEnabled = true
         topToolbar.isHidden = false
     }
     
@@ -123,7 +130,9 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
             imageView.contentMode = .scaleAspectFit
             topTextField.contentMode = .scaleAspectFit
             bottomTextField.contentMode = .scaleAspectFit
-            
+            topTextField.isHidden = false
+            bottomTextField.isHidden = false
+
             imageView.image = image
             topTextField.text = "TOP"
             bottomTextField.text = "BOTTOM"
@@ -131,7 +140,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
             bottomTextField.textAlignment = NSTextAlignment.center
             topToolbar.isHidden = false
             Share.isEnabled = true
-            
+            Cancel.isEnabled = true
         }
     
         dismiss(animated: true, completion: nil)
@@ -228,8 +237,16 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         
         present(activityController, animated: true, completion: nil)
     }
+   
     
+    // Cancel the Meme
     
+    @IBAction func Cancel(_ sender: Any) {
+        
+        topTextField.text = ""
+        bottomTextField.text = ""
+        
+    }
     
 }
 

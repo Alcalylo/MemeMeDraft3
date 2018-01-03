@@ -11,12 +11,12 @@ import UIKit
 class ActivityViewController: UIViewController {
     
     
-    @IBOutlet weak var Cancel: UIBarButtonItem!
+    
     
     override func viewWillAppear(_ animated: Bool){
-    
+        
         super.viewWillAppear(animated)
-        Cancel.isEnabled = true
+        
     }
     
     
@@ -25,8 +25,6 @@ class ActivityViewController: UIViewController {
         
     }
     
-    @IBAction func dismiss () {
-        self.dismiss( animated: true, completion: nil)
-    }
+    
     
 }
