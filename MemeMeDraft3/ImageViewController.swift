@@ -11,10 +11,10 @@ import UIKit
 class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     
-    // Define properties
+    // Define Properties
     
-    @IBOutlet weak var Camera: UIBarButtonItem!
-    @IBOutlet weak var Album: UIBarButtonItem!
+    @IBOutlet weak var camera: UIBarButtonItem!
+    @IBOutlet weak var album: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     @IBOutlet weak var topTextField: UITextField!
@@ -24,25 +24,35 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     @IBOutlet weak var Cancel: UIBarButtonItem!
     
     
-    struct Meme {
-        var topText : String
-        var bottomText : String
-        var memeOriginal : UIImage
-        var memedImage : UIImage
+    // Enable TextFields Toolbars and Buttons
+    
+    func enableToolbarsTextFieldsAndButtons() {
         
-        init (topText: String, bottomText: String, memeOriginal: UIImage, memedImage: UIImage) {
-            
-            self.topText = topText
-            self.bottomText = bottomText
-            self.memeOriginal = memeOriginal
-            self.memedImage = memedImage
-        }
+        topToolbar.isHidden = false
+        bottomToolbar.isHidden = false
+        topTextField.isHidden = false
+        bottomTextField.isHidden = false
+        Share.isEnabled = true
+        Cancel.isEnabled = true
+    }
+    
+    // Disable TextFields Toolbars and Buttons
+    
+    func disableToolbarsTextFieldsButtons() {
+        
+        topToolbar.isHidden = true
+        bottomToolbar.isHidden = true
+        topTextField.isHidden = true
+        bottomTextField.isHidden = true
+        Share.isEnabled = false
+        Cancel.isEnabled = false
+        
     }
     
     // Define TextField Delegates
     
-    let textField1 = TextFieldDelegate()
-    let textField2 = TextFieldDelegate()
+    let upperTextField = TextFieldDelegate()
+    let lowerTextField = TextFieldDelegate()
     
     
     // Life Cycle
@@ -50,13 +60,13 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        
         imageView.contentMode = .scaleAspectFit
-        Camera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        topTextField.contentMode = .scaleAspectFit
+        bottomTextField.contentMode = .scaleAspectFit
+        camera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         subscribeToKeyboardNotifications()
-        topTextField.isHidden = true
-        bottomTextField.isHidden = true
-        Share.isEnabled = false
-        Cancel.isEnabled = false
+        
     }
     
     
@@ -65,8 +75,8 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         
         // Set TextField Delegate
         
-        self.topTextField.delegate = textField1
-        self.bottomTextField.delegate = textField2
+        topTextField.delegate = upperTextField
+        bottomTextField.delegate = lowerTextField
         
         topTextField.text = ""
         bottomTextField.text = ""
@@ -81,6 +91,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         
         topTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.defaultTextAttributes = memeTextAttributes
+        
     }
     
     
@@ -90,20 +101,26 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         unsubscribeFromKeyboardNotifications()
     }
     
+    
+    // Pick an Image
+    
+    func pickAnImage(source : UIImagePickerControllerSourceType) {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = source
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    
     //Pick An Image From Album
     
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         
-        Share.isEnabled = true
-        Cancel.isEnabled = true
-        topToolbar.isHidden = false
-        topTextField.isHidden = false
-        bottomTextField.isHidden = false
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
-        
+        pickAnImage(source: .photoLibrary)
     }
     
     
@@ -111,13 +128,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
         
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
-        Share.isEnabled = true
-        Cancel.isEnabled = true
-        topToolbar.isHidden = false
+        pickAnImage(source: .camera)
     }
     
     
@@ -125,24 +136,18 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
+        enableToolbarsTextFieldsAndButtons()
+        
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
-            imageView.contentMode = .scaleAspectFit
-            topTextField.contentMode = .scaleAspectFit
-            bottomTextField.contentMode = .scaleAspectFit
-            topTextField.isHidden = false
-            bottomTextField.isHidden = false
-
             imageView.image = image
             topTextField.text = "TOP"
             bottomTextField.text = "BOTTOM"
             topTextField.textAlignment = NSTextAlignment.center
             bottomTextField.textAlignment = NSTextAlignment.center
-            topToolbar.isHidden = false
-            Share.isEnabled = true
-            Cancel.isEnabled = true
+            
         }
-    
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -198,16 +203,18 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     
     func generateMemedImage() -> UIImage {
         
-        self.bottomToolbar.isHidden = true
-        self.topToolbar.isHidden = true
+        
+        bottomToolbar.isHidden = true
+        topToolbar.isHidden = true
         
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        self.topToolbar.isHidden = false
-        self.bottomToolbar.isHidden = false
+        topToolbar.isHidden = false
+        bottomToolbar.isHidden = false
+        
         
         return memedImage
     }
@@ -237,11 +244,11 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         
         present(activityController, animated: true, completion: nil)
     }
-   
+    
     
     // Cancel the Meme
     
-    @IBAction func Cancel(_ sender: Any) {
+    @IBAction func cancelMeme(_ sender: Any) {
         
         topTextField.text = ""
         bottomTextField.text = ""
