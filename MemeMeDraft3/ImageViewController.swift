@@ -24,30 +24,33 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     @IBOutlet weak var Cancel: UIBarButtonItem!
     
     
-    // Enable TextFields Toolbars and Buttons
+    // Configure TextFields and Buttons
     
-    func enableToolbarsTextFieldsAndButtons() {
+    func configureTextFieldsAndButtons(show: Bool) {
         
-        topToolbar.isHidden = false
-        bottomToolbar.isHidden = false
-        topTextField.isHidden = false
-        bottomTextField.isHidden = false
-        Share.isEnabled = true
-        Cancel.isEnabled = true
+        if show == true {
+            topTextField.isHidden = false
+            bottomTextField.isHidden = false
+            Share.isEnabled = true
+            Cancel.isEnabled = true
+        }
     }
     
-    // Disable TextFields Toolbars and Buttons
     
-    func disableToolbarsTextFieldsButtons() {
+    //Configure Toobars
+    
+    func configureToolbars(show: Bool) {
         
-        topToolbar.isHidden = true
-        bottomToolbar.isHidden = true
-        topTextField.isHidden = true
-        bottomTextField.isHidden = true
-        Share.isEnabled = false
-        Cancel.isEnabled = false
-        
+        if show == true {
+            topToolbar.isHidden = false
+            bottomToolbar.isHidden = false
+        }
+        else {
+            topToolbar.isHidden = true
+            bottomToolbar.isHidden = true
+        }
     }
+    
     
     // Define TextField Delegates
     
@@ -73,25 +76,8 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set TextField Delegate
-        
-        topTextField.delegate = upperTextField
-        bottomTextField.delegate = lowerTextField
-        
-        topTextField.text = ""
-        bottomTextField.text = ""
-        
-        // Set Meme Styles
-        
-        let memeTextAttributes:[String:Any] = [
-            NSAttributedStringKey.strokeColor.rawValue: UIColor.white,
-            NSAttributedStringKey.foregroundColor.rawValue: UIColor.black,
-            NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSAttributedStringKey.strokeWidth.rawValue: -3.0]
-        
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        
+        configureTextFields(textField: topTextField, withText: "")
+        configureTextFields(textField: bottomTextField, withText: "")
     }
     
     
@@ -103,16 +89,43 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     }
     
     
+    // Configure the Text Fields
+    
+    func configureTextFields(textField: UITextField, withText text: String) {
+        
+        
+        // Set TextField Delegate
+        
+        topTextField.delegate = upperTextField
+        bottomTextField.delegate = lowerTextField
+        
+        
+        // Set Meme Styles
+        
+        let memeTextAttributes:[String:Any] = [
+            NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
+            NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSAttributedStringKey.strokeWidth.rawValue: -3.0]
+        
+        topTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.textAlignment = NSTextAlignment.center
+        bottomTextField.textAlignment = NSTextAlignment.center
+        
+        
+    }
+    
+    
     // Pick an Image
     
     func pickAnImage(source : UIImagePickerControllerSourceType) {
+        
         
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = source
         present(imagePicker, animated: true, completion: nil)
-        Share.isEnabled = true
-        
         
     }
     
@@ -141,14 +154,11 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         
-        
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
             imageView.image = image
             topTextField.text = "TOP"
             bottomTextField.text = "BOTTOM"
-            topTextField.textAlignment = NSTextAlignment.center
-            bottomTextField.textAlignment = NSTextAlignment.center
             
         }
         
@@ -168,14 +178,14 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     @objc func keyboardWillShow(_ notification:Notification) {
         
         if bottomTextField.isFirstResponder {
-            view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y = -getKeyboardHeight(notification)
         }
     }
     
     @objc func keyboardWillHide(_ notification:Notification) {
         
         if bottomTextField.isFirstResponder {
-            view.frame.origin.y += getKeyboardHeight(notification)
+            view.frame.origin.y = 0
         }
     }
     
@@ -208,16 +218,14 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     func generateMemedImage() -> UIImage {
         
         
-        bottomToolbar.isHidden = true
-        topToolbar.isHidden = true
+        configureToolbars(show: false)
         
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        topToolbar.isHidden = false
-        bottomToolbar.isHidden = false
+        configureToolbars(show: true)
         
         
         return memedImage
