@@ -99,6 +99,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
+        
     }
     
     
@@ -110,6 +111,8 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         imagePicker.delegate = self
         imagePicker.sourceType = source
         present(imagePicker, animated: true, completion: nil)
+        Share.isEnabled = true
+        
         
     }
     
@@ -121,6 +124,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         
         pickAnImage(source: .photoLibrary)
+        
     }
     
     
@@ -136,7 +140,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        enableToolbarsTextFieldsAndButtons()
+        
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
