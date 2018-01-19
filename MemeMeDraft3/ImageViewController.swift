@@ -217,7 +217,6 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     
     func generateMemedImage() -> UIImage {
         
-        
         configureToolbars(show: false)
         
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -227,15 +226,27 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         
         configureToolbars(show: true)
         
-        
         return memedImage
     }
     
     
     // Save the meme
     
+            // Create the meme
+    
     func save(memedImage: UIImage) {
+        
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, memeOriginal: imageView.image!, memedImage: generateMemedImage())
+    
+        // Add it to the memes array in the Application Delegate
+        
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+        
+        let tabBarController = self.storyboard!.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+        present(tabBarController, animated: true, completion: nil)
+        
     }
     
     
@@ -255,6 +266,9 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         }
         
         present(activityController, animated: true, completion: nil)
+        
+        
+
     }
     
     
